@@ -1,4 +1,4 @@
-package com.clara;
+package com.Brendon;
 
 /**
  * Created by Clara. Manages game components such as the Snake, Kibble... and their interactions.

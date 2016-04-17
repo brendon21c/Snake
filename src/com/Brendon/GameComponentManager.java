@@ -17,6 +17,11 @@ public class GameComponentManager {
      */
     public void update() {
         snake.moveSnake();
+        System.out.println(snake);
+        System.out.println(snake.snakeHeadX);
+        System.out.println(snake.snakeHeadY);
+        System.out.println(snake.maxX);
+
         if (snake.didEatKibble(kibble)) {
 			//tell kibble to update
             kibble.moveKibble(snake);
@@ -25,6 +30,7 @@ public class GameComponentManager {
     }
 
     public void newGame() {
+        SnakeGame.getGameSpeed();
         snake.reset();
     }
 

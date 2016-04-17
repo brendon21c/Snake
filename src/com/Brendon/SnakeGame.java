@@ -7,13 +7,14 @@ import javax.swing.*;
 
 public class SnakeGame {
 
-	public final static int xPixelMaxDimension = 501;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
-	public final static int yPixelMaxDimension = 501;
+	public final static int xPixelMaxDimension = 701;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
+	public final static int yPixelMaxDimension = 701;
+
 
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 50;
+	public final static int squareSize = 35; // 70, 50 and 35 all work for even squares
 
 	protected static Snake snake ;
 
@@ -32,10 +33,19 @@ public class SnakeGame {
 	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
 	//Other classes like Snake and DrawSnakeGamePanel will query this, and change its value
 
-	protected static long clockInterval = 500; //controls game speed
+	protected static long clockInterval; //controls game speed
 	//Every time the clock ticks, the snake moves
 	//This is the time between clock ticks, in milliseconds
 	//1000 milliseconds = 1 second.
+
+
+	public static void setClockInterval(long clockInterval) {
+		SnakeGame.clockInterval = clockInterval;
+	}
+
+	public static long getClockInterval() {
+		return clockInterval;
+	}
 
 	static JFrame snakeFrame;
 	static DrawSnakeGamePanel snakePanel;
@@ -62,6 +72,7 @@ public class SnakeGame {
 		snakeFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		snakeFrame.setSize(xPixelMaxDimension, yPixelMaxDimension);
+		snakeFrame.setLocation(150,50);
 		snakeFrame.setUndecorated(true); //hide title bar
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(false);

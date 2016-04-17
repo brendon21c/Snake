@@ -1,8 +1,12 @@
 package com.Brendon;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /** This class responsible for displaying the graphics, so the snake, grid, kibble, instruction text and high score
@@ -14,9 +18,10 @@ public class DrawSnakeGamePanel extends JPanel {
 	
 	private static int gameStage = SnakeGame.BEFORE_GAME;  //use this to figure out what to paint
 	
-	private Snake snake;
+	public Snake snake;
 	private Kibble kibble;
 	private Score score;
+	public boolean isWalls = false;
 	
 	DrawSnakeGamePanel(GameComponentManager components){
 		this.snake = components.getSnake();
@@ -88,7 +93,18 @@ public class DrawSnakeGamePanel extends JPanel {
 	private void displayGame(Graphics g) {
 		displayGameGrid(g);
 		displaySnake(g);
-		displayKibble(g);	
+		displayKibble(g);
+
+		if (isWalls == true) { // paints walls on the screen and catches an error of the method cannot be called
+
+			try {
+				buildWall(g);
+			} catch (Exception e) {
+				System.out.println("buildwall not working");
+
+			}
+		}
+
 	}
 
 	private void displayGameGrid(Graphics g) {
@@ -99,8 +115,9 @@ public class DrawSnakeGamePanel extends JPanel {
 		
 		g.clearRect(0, 0, maxX, maxY);
 
-		g.setColor(Color.RED);
+		g.setColor(Color.black);
 
+		/*
 		//Draw grid - horizontal lines
 		for (int y=0; y <= maxY ; y+= squareSize){			
 			g.drawLine(0, y, maxX, y);
@@ -108,13 +125,13 @@ public class DrawSnakeGamePanel extends JPanel {
 		//Draw grid - vertical lines
 		for (int x=0; x <= maxX ; x+= squareSize){			
 			g.drawLine(x, 0, x, maxY);
-		}
+		} */
 	}
 
 	private void displayKibble(Graphics g) {
 
 		//Draw the kibble in green
-		g.setColor(Color.GREEN);
+		g.setColor(Color.CYAN);
 
 		int x = kibble.getKibbleX() * SnakeGame.squareSize;
 		int y = kibble.getKibbleY() * SnakeGame.squareSize;
@@ -123,13 +140,41 @@ public class DrawSnakeGamePanel extends JPanel {
 		
 	}
 
+	public void buildWall(Graphics g) throws IOException { // builds wall and checks locations, could be better
+
+
+		//BufferedImage img = ImageIO.read(new File("/Users/Brendon/Desktop/Java Class/Snake/img_5520.jpg"));
+
+		g.setColor(Color.GRAY);
+
+		//g.drawImage(img,2,2,this);
+
+		g.fillRect(SnakeGame.xPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), SnakeGame.yPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), snake.squareSize,snake.squareSize);
+		g.fillRect(SnakeGame.xPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), SnakeGame.yPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize) + snake.squareSize, snake.squareSize,snake.squareSize);
+		g.fillRect(SnakeGame.xPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), SnakeGame.yPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize) + (snake.squareSize * 2), snake.squareSize,snake.squareSize);
+		/*
+		g.fillRect(300,100,snake.squareSize,snake.squareSize);
+		g.fillRect(300,150,snake.squareSize,snake.squareSize);
+		g.fillRect(300,200,snake.squareSize,snake.squareSize);
+		g.fillRect(300,550,snake.squareSize,snake.squareSize);
+		g.fillRect(350,550,snake.squareSize,snake.squareSize);
+		g.fillRect(400,550,snake.squareSize,snake.squareSize);
+		*/
+
+		if (snake.snakeHeadX == 2 && snake.snakeHeadY == 2 || snake.snakeHeadX == 2 && snake.snakeHeadY == 3) {
+
+			snake.hitWall = true;
+		}
+
+	}
+
 
 	private void displaySnake(Graphics g) {
 
 		LinkedList<Point> coordinates = snake.segmentsToDraw();
 		
 		//Draw head in grey
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.green);
 		Point head = coordinates.pop();
 		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		
@@ -142,8 +187,13 @@ public class DrawSnakeGamePanel extends JPanel {
 
 
 	private void displayInstructions(Graphics g) {
-        g.drawString("Press any key to begin!",100,200);		
-        g.drawString("Press q to quit the game",100,300);		
+        g.drawString("Press the 1 key for easy difficulty!",100,150);
+		g.drawString("Press the 2 key for medium difficulty!",100,200);
+		g.drawString("Press the 3 key for hard difficulty!",100,250);
+
+		g.drawString("Press q to quit the game",100,300);
+		g.drawString("Press w to allow snake to wrap around board", 100,350);
+		g.drawString("Press m to activate maze walls", 100,400);
     	}
 }
 

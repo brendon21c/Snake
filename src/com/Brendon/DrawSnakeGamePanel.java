@@ -149,19 +149,20 @@ public class DrawSnakeGamePanel extends JPanel {
 
 		//g.drawImage(img,2,2,this);
 
-		g.fillRect(SnakeGame.xPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), SnakeGame.yPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), snake.squareSize,snake.squareSize);
-		g.fillRect(SnakeGame.xPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), SnakeGame.yPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize) + snake.squareSize, snake.squareSize,snake.squareSize);
-		g.fillRect(SnakeGame.xPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize), SnakeGame.yPixelMaxDimension / (SnakeGame.xPixelMaxDimension / snake.squareSize) + (snake.squareSize * 2), snake.squareSize,snake.squareSize);
-		/*
-		g.fillRect(300,100,snake.squareSize,snake.squareSize);
-		g.fillRect(300,150,snake.squareSize,snake.squareSize);
-		g.fillRect(300,200,snake.squareSize,snake.squareSize);
-		g.fillRect(300,550,snake.squareSize,snake.squareSize);
-		g.fillRect(350,550,snake.squareSize,snake.squareSize);
-		g.fillRect(400,550,snake.squareSize,snake.squareSize);
-		*/
+		g.fillRect(70, 70, snake.squareSize,snake.squareSize);
+		g.fillRect(70, 105, snake.squareSize,snake.squareSize);
+		g.fillRect(70, 140, snake.squareSize,snake.squareSize);
 
-		if (snake.snakeHeadX == 2 && snake.snakeHeadY == 2 || snake.snakeHeadX == 2 && snake.snakeHeadY == 3) {
+		g.fillRect(105,70,snake.squareSize,snake.squareSize);
+		g.fillRect(140,70,snake.squareSize,snake.squareSize);
+		g.fillRect(175,70,snake.squareSize,snake.squareSize);
+
+
+
+
+		if (snake.snakeHeadX == 2 && snake.snakeHeadY == 2 || snake.snakeHeadX == 2 && snake.snakeHeadY == 3
+				|| snake.snakeHeadX == 2 && snake.snakeHeadY == 4 || snake.snakeHeadX == 3 && snake.snakeHeadY == 2 ||
+				snake.snakeHeadX == 4 && snake.snakeHeadY == 2 || snake.snakeHeadX == 5 && snake.snakeHeadY == 2) {
 
 			snake.hitWall = true;
 		}
@@ -187,10 +188,12 @@ public class DrawSnakeGamePanel extends JPanel {
 
 
 	private void displayInstructions(Graphics g) {
+		g.drawString("Choose a difficulty to start the game: ", 100, 100);
         g.drawString("Press the 1 key for easy difficulty!",100,150);
 		g.drawString("Press the 2 key for medium difficulty!",100,200);
 		g.drawString("Press the 3 key for hard difficulty!",100,250);
 
+		g.drawString("Added features, choose before starting: ", 100, 275);
 		g.drawString("Press q to quit the game",100,300);
 		g.drawString("Press w to allow snake to wrap around board", 100,350);
 		g.drawString("Press m to activate maze walls", 100,400);

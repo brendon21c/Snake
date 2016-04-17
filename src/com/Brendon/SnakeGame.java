@@ -30,7 +30,7 @@ public class SnakeGame {
 	//Using constant names instead makes it easier to keep it straight. Refer to these variables 
 	//using statements such as SnakeGame.GAME_OVER 
 
-	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
+	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening.
 	//Other classes like Snake and DrawSnakeGamePanel will query this, and change its value
 
 	protected static long clockInterval; //controls game speed
@@ -39,7 +39,7 @@ public class SnakeGame {
 	//1000 milliseconds = 1 second.
 
 
-	public static void setClockInterval(long clockInterval) {
+	public static void setClockInterval(long clockInterval) { // I set this up so that the user can choose a game speed
 		SnakeGame.clockInterval = clockInterval;
 	}
 

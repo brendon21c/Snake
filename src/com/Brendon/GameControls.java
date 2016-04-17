@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 public class GameControls implements KeyListener{
 
 	private Snake snake;
-	private int gamespeed = 0;
 
 	public void keyPressed(KeyEvent ev) {
 		//keyPressed events are for catching events like function keys, enter, arrow keys

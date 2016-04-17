@@ -30,7 +30,7 @@ public class GameComponentManager {
     }
 
     public void newGame() {
-        SnakeGame.getGameSpeed();
+
         snake.reset();
     }
 
